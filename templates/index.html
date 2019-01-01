@@ -54,6 +54,12 @@
                     {{ article.title }}
                 </h2>
             </a>
+            <p class="post-meta">
+                Le {{ article.date|strftime('%d %B %Y') }} |
+                {% for tag in article.tags %}
+		<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag|title }}{% if not loop.last %},{% endif%}</a>
+                {% endfor %}
+            </p>
             {% if SHOW_FULL_ARTICLE %}
                 {{ article.content }}
             {% else %}
@@ -61,16 +67,10 @@
                 {% if article.has_summary %}
                     {{ article.summary }}
                 {% elif article.summary %}
-                    {{ article.summary|striptags|truncate(140) }}
+                    {{ article.summary|striptags|truncate(240, True) }}
                 {% endif %}
                 </p>
             {% endif %}
-            <p class="post-meta">Posted by
-                {% for author in article.authors %}
-                    <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
-                {% endfor %}
-                 on {{ article.locale_date }}
-            </p>
             {% include 'comments.html' %}
         </div>
     {% endfor %}
