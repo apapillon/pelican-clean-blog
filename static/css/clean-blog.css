@@ -69,6 +69,17 @@ hr.small {
   font-weight: 800;
   letter-spacing: 1px;
 }
+article table {
+  background-color: transparent;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+article table td {
+  vertical-align: top;
+  padding: .3rem;
+  border-top: 1px solid #dee2e6;
+}
 @media only screen and (min-width: 768px) {
   .navbar-custom {
     background: transparent;
