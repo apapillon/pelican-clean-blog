@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+
+{% if PELICAN_COMMENT_SYSTEM %}
+{% import 'pcs/comments.html' as pcs with context %}
+{% endif %}
+
 {% block title %}{{ article.title|striptags }}{% endblock %}
 
 {% block head %}
@@ -136,14 +141,14 @@
 		    <div class="col-xs-6">
 			    {% if article.prev_article %}
 			    <a class="btn btn-default" href="{{ SITEURL }}/{{ article.prev_article.url}}">
-				    {{ article.prev_article.title|truncate(35, True) }}
+				    {{ article.prev_article.title|truncate(32, True) }}
 			    </a>
 			    {% endif %}
 		    </div>
 		    <div class="col-xs-6 text-right">
 			    {% if article.next_article %}
 			    <a class="btn btn-default" role="button" href="{{ SITEURL }}/{{ article.next_article.url}}">
-				    {{ article.next_article.title|truncate(35, True) }}
+				    {{ article.next_article.title|truncate(32, True) }}
 			    </a>
 			    {% endif %}
 		    </div>
@@ -169,5 +174,8 @@
             </script>
             <noscript>Please enable JavaScript to view the comments.</noscript>
         </div>
+    {% endif %}
+    {% if PELICAN_COMMENT_SYSTEM %}
+        {{ pcs.comments_quickstart() }}
     {% endif %}
 {% endblock content %}
